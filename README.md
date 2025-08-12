@@ -135,8 +135,8 @@ Here are screenshots demonstrating the API endpoints.
 
 **Encoding Text:**
 
-[![Demo of Encode API](https://i.postimg.cc/D0xkw6jw/Screenshot-2025-08-12-130610.png)](https://postimg.cc/m116dYWv)
+![Demo of Encode API](https://i.postimg.cc/D0xkw6jw/Screenshot-2025-08-12-130610.png)]
 
 **Decoding Tokens:**
 
-[![Demo of Decode API](https://i.postimg.cc/qMFSDzWS/Screenshot-2025-08-12-130944.png)](https://postimg.cc/qz81zMJx)
+![Demo of Decode API](https://i.postimg.cc/qMFSDzWS/Screenshot-2025-08-12-130944.png)]
