@@ -7,7 +7,7 @@ const app = express();
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/health", (req, res) => {
+app.use("/api/health", (req, res) => {
   res.send("Good");
 });
 app.use("/api", router)
