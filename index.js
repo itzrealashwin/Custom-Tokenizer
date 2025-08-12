@@ -1,33 +1,38 @@
 const express = require("express");
 const cors = require("cors");
-const tokenRoutes = require("./routes/tokenRoutes");
+
+const app = express();
 
 const allowedOrigins = [
   'http://localhost:3000',
   'https://custom-tokenizer-api-reference.vercel.app'
 ];
 
-const app = express();
+// CORS middleware with explicit OPTIONS handler
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
 
-app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // Allow non-browser requests like curl, postman
-    if (allowedOrigins.indexOf(origin) === -1) {
-      return callback(new Error('Not allowed by CORS'), false);
-    }
-    return callback(null, true);
-  },
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true,
-}));
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
 
-app.use(express.urlencoded({ extended: true }));
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
+
 app.use(express.json());
 
-app.use("/api", tokenRoutes);
+app.post('/api/encode', (req, res) => {
+  // Your encoding logic here
+  res.json({ message: "Encode API working!" });
+});
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
